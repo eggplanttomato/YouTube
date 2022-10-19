@@ -256,6 +256,9 @@
         font-size: 15px;
       }
     }
+    .logo-button{
+      display: flex;
+    }
   </style>
 
 </head>
@@ -264,8 +267,9 @@
   <div class="header">
     <div class="top-left-icons">
       <i class="fa-solid fa-bars"></i>
-      <i class="fa-brands fa-youtube logo"></i>
-      <h2>YouTube</h2>
+      <form type="submit" class="logo-button submit">
+    <i class="fa-brands fa-youtube logo"></i><h2>YouTube</h2>
+      </form>
     </div>
     <div class="search">
       <form id="search-form">
@@ -318,7 +322,7 @@
     // fetch youtube API
     const youtube = async () => {
       const keyword = document.querySelector('#search-bar').value
-      const data = await (await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${keyword}&maxResults=18&key=AIzaSyAaBEI9Z7IcwNqEkTvBFxtVZSUVJTdioSg`)).json()
+      const data = await (await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${keyword}&maxResults=12&key=AIzaSyAaBEI9Z7IcwNqEkTvBFxtVZSUVJTdioSg`)).json()
       return data
     }
 
