@@ -31,7 +31,7 @@
 
     .main {
       display: flex;
-      }
+    }
 
     #video-divs {
       display: flex;
@@ -227,9 +227,11 @@
       .side-menu {
         display: none;
       }
+
       #video-divs {
         justify-content: center;
       }
+
       a,
       .right-icon,
       .user-icon {
@@ -256,8 +258,11 @@
         font-size: 15px;
       }
     }
-    .logo-button{
+
+    .logo-button {
       display: flex;
+      border: 0;
+      background-color: white;
     }
   </style>
 
@@ -267,17 +272,19 @@
   <div class="header">
     <div class="top-left-icons">
       <i class="fa-solid fa-bars"></i>
-      <form type="submit" class="logo-button submit">
-    <i class="fa-brands fa-youtube logo"></i><h2>YouTube</h2>
-      </form>
+      <!-- <i class="fa-brands fa-youtube logo"></i><h2>YouTube</h2> -->
+      <button onclick="reset()" type="button" class="logo-button">
+        <!-- <button onclick=`${document.querySelector(".submit").click()}` type="button" class="logo-button"> -->
+        <i class="fa-brands fa-youtube logo"></i>
+        <h2>YouTube</h2>
+      </button>
     </div>
     <div class="search">
       <form id="search-form">
         <div class="input-group mb-3">
           <input id="search-bar" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-          <button type="submit" class="input-group-text submit" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button type="submit" class="input-group-text submit" id="basic-addon2 submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           <div class="microphone">
-
             <a href="#"><i class="fa-solid fa-microphone icon"></i></a>
           </div>
         </div>
@@ -319,6 +326,10 @@
     </div>
   </div>
   <script>
+  // Global variables for SearchForm and Reset functions
+    let container = document.querySelector('#video-divs')
+    let searchForm = document.querySelector('#search-form')
+
     // fetch youtube API
     const youtube = async () => {
       const keyword = document.querySelector('#search-bar').value
@@ -332,14 +343,14 @@
 
 
     // Enter a keyword and search for new videos
-    let searchForm = document.querySelector('#search-form')
+    // let searchForm = document.querySelector('#search-form')
     searchForm.addEventListener('submit', function(e) {
       e.preventDefault()
 
       youtube()
         .then(data => response(data))
 
-      let container = document.querySelector('#video-divs')
+      // let container = document.querySelector('#video-divs')
       container.innerHTML = ""
       let response = data => {
         let videoInfo = data.items.map(item => {
@@ -358,6 +369,13 @@
         });
       }
     })
+
+    //Logo click resets search field and displays trending videos
+    function reset() {
+      searchForm.reset()
+      container.innerHTML = ""
+      document.querySelector(".submit").click()
+    }
   </script>
 </body>
 
